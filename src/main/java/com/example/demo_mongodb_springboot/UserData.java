@@ -11,17 +11,17 @@ public class UserData {
     private String userLastName;
     private String userDob;
     @Id
-    private String userId;
+    private String Id;
     private String userAddress;
     private String userCity;
     private String userState;
     private String userZip;
 
-    public UserData(String userFirstName, String userLastName, String userDob, String userId, String userAddress, String userCity, String userState, String userZip) {
+    public UserData(String userFirstName, String userLastName, String userDob, String Id, String userAddress, String userCity, String userState, String userZip) {
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
         this.userDob = userDob;
-        this.userId = userId;
+        this.Id = Id;
         this.userAddress = userAddress;
         this.userCity = userCity;
         this.userState = userState;
@@ -55,12 +55,12 @@ public class UserData {
         this.userDob = userDob;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getId() {
+        return Id;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setId(String userId) {
+        this.Id = userId;
     }
 
     public String getUserAddress() {

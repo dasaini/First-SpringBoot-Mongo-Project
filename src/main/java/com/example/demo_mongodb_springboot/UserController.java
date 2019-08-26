@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Optional;
+
+
 @RestController
 public class UserController {
 
@@ -18,14 +22,13 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @RequestMapping(value = "v1/user", method = RequestMethod.POST)
+    @RequestMapping(value = "v1/user/post", method = RequestMethod.POST)
     public ResponseEntity<UserData> postUserDataMongoDatabase (@RequestBody UserData userData){
 
         UserData userData1 = new UserData();
         userData1.setUserFirstName(userData.getUserFirstName());
         userData1.setUserLastName(userData.getUserLastName());
         userData1.setUserDob(userData.getUserDob());
-        userData1.setUserId(userData.getUserId());
         userData1.setUserAddress(userData.getUserAddress());
         userData1.setUserCity(userData.getUserCity());
         userData1.setUserState(userData.getUserState());
@@ -33,12 +36,30 @@ public class UserController {
 
         this.userRepository.save(userData1);
 
+
+        UserData userRepositoryById = this.userRepository.findById(userData1.getId()).get();
+
         return new ResponseEntity<>(userData1, HttpStatus.OK);
 
 
     }
 
+    @RequestMapping(value = "v1/user/get", method = RequestMethod.GET)
+    public List<UserData> getUserData(){
+        List<UserData> userData = this.userRepository.findAll();
+        return userData;
+    }
 
 
+//    @RequestMapping(value = "v1/user/post/searchOptional", method = RequestMethod.POST)
+//    public ResponseEntity<UserData> searchUserId (@RequestBody String id){
+//
+//        UserData userRepositoryById = this.userRepository.findById(id).get();
+//
+//        return new ResponseEntity<>(userRepositoryById, HttpStatus.OK);
+//
+//
+//    }
+//
 
 }
